@@ -1,19 +1,29 @@
 /* Var */
-$black: #333;
+$black: #444;
 $grey: #aaa;
 $white: #fff;
 $bg: #eee;
 $color: #0173ff;
+$subcolor: #00ffb8;
 $logo: "Righteous", cursive;
-$gradient: linear-gradient(25deg, #00ffb8, #0173ff 70%),
-  -webkit-linear-gradient(25deg, #00ffb8, #0173ff 70%);
+$gradient: linear-gradient(25deg, #00ffb8, #0173ff 60%),
+  -webkit-linear-gradient(25deg, #00ffb8, #0173ff 60%);
 $border: 1px solid #0173ff;
 $font: 11px;
 $width: 1200px;
 $boxsize: border-box;
-$btnPadding: 0.3em 1em;
 
 /* Mixin */
+@mixin logo {
+  margin: 1em auto 0;
+  font-family: $logo;
+  font-size: $font + 41;
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 6px;
+}
+
 @mixin inputStyle {
   padding: 0.3em 1em;
   border: $border;
@@ -40,19 +50,39 @@ $btnPadding: 0.3em 1em;
   }
 }
 
+@mixin textCut {
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1em;
+  white-space: nowrap;
+}
+
+@mixin gradientAni {
+  @keyframes gradientHover {
+    0% {
+      background: #0173ff;
+    }
+    to {
+      background: $gradient;
+    }
+  }
+  animation: gradientHover 1s 0s 1 ease-in-out forwards;
+  transition: all 1s ease;
+}
+
 /* Tags */
+*:focus {
+  outline: 1px solid $subcolor;
+}
+
 .header_section {
   width: $width;
   margin: 0 auto;
   text-align: center;
   .logo {
-    margin: 1em auto 0;
-    font-family: $logo;
-    font-size: $font + 41;
-    background: $gradient;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 6px;
+    @include logo;
   }
 }
 
@@ -73,6 +103,10 @@ $btnPadding: 0.3em 1em;
 
     input[type="button"] {
       @include inputStyle;
+      &:hover {
+        @include gradientAni;
+        color: $white;
+      }
     }
 
     .select_box {
@@ -110,18 +144,58 @@ $btnPadding: 0.3em 1em;
 
         li {
           width: 22%;
-          height: 200px;
+          height: 230px;
           margin: 2.5em 0 0 4%;
-          padding: 1.5em;
-          border-radius: 0.2em;
-          background: #fff;
-          box-sizing: border-box;
           a {
             display: block;
             width: 100%;
             height: 100%;
+            padding: 1em;
+            border-radius: 0.2em;
+            background: $white;
+            font-size: 0.8em;
             color: $black;
             text-decoration: none;
+            box-sizing: border-box;
+
+            > strong.logo {
+              @include logo;
+              display: block;
+              margin: 0;
+              font-size: $font;
+              text-align: center;
+              > em {
+                font-style: normal;
+              }
+            }
+            > span {
+              display: block;
+              margin-top: 0.8em;
+              padding-bottom: 0.1em;
+              border-bottom: 1px solid $grey;
+              &.note {
+                margin-top: 1.5em;
+                border: none;
+                @include textCut;
+              }
+              > strong {
+                &:after {
+                  content: " : ";
+                }
+              }
+            }
+            &:hover {
+              color: $white;
+              @include gradientAni;
+              > span {
+                border-color: transparent;
+              }
+              > strong.logo {
+                background: linear-gradient(25deg, #fff, #fff 60%),
+                  -webkit-linear-gradient(25deg, #fff, #fff 60%);
+                -webkit-background-clip: text;
+              }
+            }
           }
         }
         li:nth-child(4n + 1) {
@@ -139,4 +213,127 @@ $btnPadding: 0.3em 1em;
   font-size: $font + 2;
   text-align: center;
   color: $grey;
+}
+
+/* popup */
+.popup_wrap {
+  position: fixed;
+  top: 2em;
+  left: 50%;
+  width: $width/2;
+  height: auto;
+  margin-left: -$width/2/2;
+  padding: 2em;
+  background: $white;
+  font-size: 1.1em;
+  border: $border;
+  border-radius: 0.5em;
+  color: $black;
+  .logo {
+    @include logo;
+    margin: 0;
+    font-size: $font;
+    > em {
+      font-style: normal;
+    }
+  }
+  button,
+  input[type="button"] {
+    border: none;
+    background: transparent;
+  }
+  .btn_close {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 1.5em;
+    color: $color;
+    cursor: pointer;
+  }
+  .btn_box {
+    margin-top: 1em;
+    text-align: center;
+    input {
+      margin: 0 0.5em;
+      @include inputStyle;
+      &:hover {
+        @include gradientAni;
+        color: $white;
+      }
+    }
+  }
+}
+
+#popDetail {
+  display: none;
+  > span {
+    display: block;
+    margin-top: 1em;
+    &:first-child {
+      margin-top: 0;
+    }
+    strong {
+      &:after {
+        content: " : ";
+      }
+    }
+  }
+  .note {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 100%;
+    height: 150px;
+    padding: 0 1em;
+    font-size: 0.9em;
+    box-sizing: $boxsize;
+    @include scrollStyle;
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      border-radius: 1em;
+    }
+  }
+}
+
+#popDetailModify {
+  display: none;
+  > span {
+    display: block;
+    margin-top: 1em;
+    &:first-child {
+      margin-top: 0;
+    }
+    label {
+      font-weight: bold;
+      font-size: 0.9em;
+      &:after {
+        content: " : ";
+      }
+    }
+    input[type="text"] {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $color;
+      font-size: 1em;
+
+      &:disabled,
+      &:read-only {
+        background: none;
+        border-bottom: 1px solid $grey;
+        color: $grey;
+        cursor: not-allowed;
+      }
+    }
+  }
+  .note {
+    textarea {
+      display: block;
+      width: 100%;
+      height: 100px;
+      margin: 0.5em;
+      padding: 0.5em 1em;
+      border: 1px solid $color;
+      font-size: 0.9em;
+      box-sizing: $boxsize;
+    }
+  }
 }
