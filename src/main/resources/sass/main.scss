@@ -6,18 +6,18 @@ $bg: #eee;
 $color: #0173ff;
 $subcolor: #00ffb8;
 $logo: "Righteous", cursive;
-$gradient: linear-gradient(25deg, #00ffb8, #0173ff 60%),
-  -webkit-linear-gradient(25deg, #00ffb8, #0173ff 60%);
-$border: 1px solid #0173ff;
+$gradient: linear-gradient(25deg, $subcolor, $color 60%),
+  -webkit-linear-gradient(25deg, $subcolor, $color 60%);
+$border: 1px solid $color;
 $font: 11px;
 $width: 1200px;
 $boxsize: border-box;
 
 /* Mixin */
-@mixin logo {
+@mixin logo($size) {
   margin: 1em auto 0;
   font-family: $logo;
-  font-size: $font + 41;
+  font-size: $size;
   background: $gradient;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -62,7 +62,7 @@ $boxsize: border-box;
 @mixin gradientAni {
   @keyframes gradientHover {
     0% {
-      background: #0173ff;
+      background: $color;
     }
     to {
       background: $gradient;
@@ -70,6 +70,30 @@ $boxsize: border-box;
   }
   animation: gradientHover 1s 0s 1 ease-in-out forwards;
   transition: all 1s ease;
+}
+
+@mixin borderAni($borderWidth) {
+  @keyframes borderHover {
+    0% {
+      border-color: $subcolor;
+      border-top-width: $borderWidth;
+    }
+    25% {
+      border-right-width: $borderWidth;
+    }
+    50% {
+      border-bottom-width: $borderWidth;
+    }
+    70% {
+      border-left-width: $borderWidth;
+    }
+    100% {
+      border-color: $color;
+      border-width: $borderWidth;
+    }
+  }
+  animation: borderHover 2s ease infinite alternate;
+  transition: all 3s ease;
 }
 
 /* Tags */
@@ -82,7 +106,7 @@ $boxsize: border-box;
   margin: 0 auto;
   text-align: center;
   .logo {
-    @include logo;
+    @include logo($font + 41);
   }
 }
 
@@ -90,7 +114,6 @@ $boxsize: border-box;
   position: relative;
   width: $width;
   margin: 0 auto;
-  background: #efefef;
 
   .top_wrap {
     $space: 20px;
@@ -144,25 +167,25 @@ $boxsize: border-box;
 
         li {
           width: 22%;
-          height: 230px;
           margin: 2.5em 0 0 4%;
           a {
             display: block;
             width: 100%;
             height: 100%;
-            padding: 1em;
-            border-radius: 0.2em;
+            padding: 1.5em;
+            border: 1px solid transparent;
+            border-radius: 0.3em;
             background: $white;
             font-size: 0.8em;
             color: $black;
             text-decoration: none;
             box-sizing: border-box;
+            box-shadow: 0 0 30px $bg;
 
             > strong.logo {
-              @include logo;
+              @include logo($font);
               display: block;
-              margin: 0;
-              font-size: $font;
+              margin: 0 0 1.5em;
               text-align: center;
               > em {
                 font-style: normal;
@@ -173,6 +196,9 @@ $boxsize: border-box;
               margin-top: 0.8em;
               padding-bottom: 0.1em;
               border-bottom: 1px solid $grey;
+              &:first-child {
+                margin-top: 0;
+              }
               &.note {
                 margin-top: 1.5em;
                 border: none;
@@ -185,16 +211,8 @@ $boxsize: border-box;
               }
             }
             &:hover {
-              color: $white;
-              @include gradientAni;
-              > span {
-                border-color: transparent;
-              }
-              > strong.logo {
-                background: linear-gradient(25deg, #fff, #fff 60%),
-                  -webkit-linear-gradient(25deg, #fff, #fff 60%);
-                -webkit-background-clip: text;
-              }
+              @include borderAni(1px);
+              box-shadow: 2px 2px 5px$grey;
             }
           }
         }
@@ -230,9 +248,8 @@ $boxsize: border-box;
   border-radius: 0.5em;
   color: $black;
   .logo {
-    @include logo;
+    @include logo($font);
     margin: 0;
-    font-size: $font;
     > em {
       font-style: normal;
     }
@@ -294,7 +311,8 @@ $boxsize: border-box;
   }
 }
 
-#popDetailModify {
+#popDetailModify,
+#popRegister {
   display: none;
   > span {
     display: block;
