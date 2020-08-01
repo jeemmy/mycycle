@@ -46,7 +46,7 @@
 .footer_section { width: 1200px; margin: 0 auto; padding: 2em 0; font-size: 13px; text-align: center; color: #aaa; }
 
 /* popup */
-.popup_wrap { position: fixed; top: 2em; left: 50%; width: 600px; height: auto; margin-left: -300px; padding: 2em; background: #fff; font-size: 1.1em; border: 1px solid #0173ff; border-radius: 0.5em; color: #444; }
+.popup_wrap { position: fixed; top: 2em; left: 50%; width: 600px; height: auto; margin-left: -300px; padding: 2em; background: #fff; font-size: 1.1em; border: 1px solid #0173ff; border-radius: 0.5em; color: #444; opacity: 0; z-index: 2; }
 .popup_wrap .logo { margin: 1em auto 0; font-family: "Righteous", cursive; font-size: 11px; background: linear-gradient(25deg, #00ffb8, #0173ff 60%), -webkit-linear-gradient(25deg, #00ffb8, #0173ff 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 6px; margin: 0; }
 .popup_wrap .logo > em { font-style: normal; }
 .popup_wrap button, .popup_wrap input[type="button"] { border: none; background: transparent; }
@@ -56,6 +56,8 @@
 .popup_wrap .btn_box input:hover { -webkit-animation: gradientHover 1s 0s 1 ease-in-out forwards; animation: gradientHover 1s 0s 1 ease-in-out forwards; -webkit-transition: all 1s ease; transition: all 1s ease; color: #fff; }
 @keyframes gradientHover { 0% { background: #0173ff; }
   to { background: linear-gradient(25deg, #00ffb8, #0173ff 60%), -webkit-linear-gradient(25deg, #00ffb8, #0173ff 60%); } }
+.popup_bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 1; }
+
 #popDetail { display: none; }
 #popDetail > span { display: block; margin-top: 1em; }
 #popDetail > span:first-child { margin-top: 0; }

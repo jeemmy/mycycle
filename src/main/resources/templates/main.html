@@ -1,8 +1,8 @@
 <section class="main_section">
   <div class="top_wrap">
-    <input type="button" value="등록" />
+    <input type="button" value="등록" onclick="popupOpen('popRegister')" />
     <div class="select_box">
-      <label for="sort"><!--<i class="fas fa-filter"></i> --></label>
+      <label for="sort"><!--<i class="fas fa-filter"></i>--></label>
       <select name="sort" id="sort">
         <option value="default">기본</option>
         <option value="user">입력 카테고리</option>
@@ -13,7 +13,7 @@
     <div class="main_inner">
       <ul class="cont_list">
         <li>
-          <a href="#">
+          <a href="#" onclick="popupOpen('popDetail')">
             <strong class="logo">BUYSCLE.<em>01</em></strong>
             <span class="name"><strong>상품명</strong>미용실</span>
             <span class="price"><strong>가격</strong>58,000</span>

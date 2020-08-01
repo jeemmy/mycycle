@@ -1,11 +1,11 @@
 <div id="popDetail" class="popup_wrap">
   <strong class="logo">BUYSCLE.<em>01</em></strong>
-  <button type="button" class="btn_close">
+  <button type="button" class="btn_close" onclick="popupClose()">
     <i class="fas fa-times"></i>
   </button>
   <span class="name"><strong>상품명</strong>미용실</span>
   <span class="price"><strong>가격</strong>58,000</span>
-  <span class="date"><strong>구매일</strong>2020/06/15</span>
+  <span class="date"><strong>결제일</strong>2020/06/15</span>
   <span class="average"><strong>평균주기</strong>00일(미정)</span>
   <span class="next"><strong>다음 예정일</strong> 2020/08/01</span>
   <span class="note"
@@ -19,14 +19,14 @@
     like Aldus PageMaker including versions of Lorem Ipsum.
   </span>
   <div class="btn_box">
-    <input type="button" value="수정" />
+    <input type="button" value="수정" onclick="popupOpen('popDetailModify')" />
     <input type="button" value="삭제" />
   </div>
 </div>
 
 <div id="popDetailModify" class="popup_wrap">
   <strong class="logo">BUYSCLE.<em>01</em></strong>
-  <button type="button" class="btn_close">
+  <button type="button" class="btn_close" onclick="popupClose()">
     <i class="fas fa-times"></i>
   </button>
   <span class="name">
@@ -50,13 +50,13 @@
     />
   </span>
   <span class="date">
-    <label for="popDate">구매일</label
+    <label for="popDate">결제일</label
     ><input
       id="popDate"
       type="text"
       name="date"
       value="2020/06/15"
-      placeholder="마지막 구매일을 입력해주세요. EX: 2020/04/13"
+      placeholder="마지막 결제일을 입력해주세요. EX: 2020/04/13"
     />
   </span>
   <span class="average">
@@ -84,7 +84,7 @@ What is Lorem Ipsum?</textarea
 
 <div id="popRegister" class="popup_wrap">
   <strong class="logo">BUYSCLE.<em>NEW</em></strong>
-  <button type="button" class="btn_close">
+  <button type="button" class="btn_close" onclick="popupClose()">
     <i class="fas fa-times"></i>
   </button>
   <span class="name">
@@ -108,13 +108,13 @@ What is Lorem Ipsum?</textarea
     />
   </span>
   <span class="date">
-    <label for="popDate">구매일</label
+    <label for="popDate">결제일</label
     ><input
       id="popDate"
       type="text"
       name="date"
       value="2020/06/15"
-      placeholder="마지막 구매일을 입력해주세요. EX: 2020/04/13"
+      placeholder="마지막 결제일을 입력해주세요. EX: 2020/04/13"
     />
   </span>
   <span class="note">

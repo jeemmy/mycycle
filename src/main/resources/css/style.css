@@ -1,2 +1,3 @@
+/* 쿼리스트링으로 버전관리 */
 @import url("index.css"); /* 초기세팅 */
-@import url("main.css"); /* 메인 */
+@import url("main.css?version_01"); /* 메인 */
