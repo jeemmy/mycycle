@@ -1,13 +1,9 @@
 //JS는 버전관리 어떻게 할까요..??
 
-$(document).ready(function () {
-  $("#btnRegister").click(function () {
-    console.log("5454545");
-  });
-});
+$(document).ready(function () {});
 
 function popupClose() {
-  $(".popup_wrap").css({ opacity: "0", display: "none" });
+  $(".popup_section .popup_wrap").css({ opacity: "0", display: "none" });
   $("html").children(".popup_bg").remove();
 }
 

@@ -14,7 +14,7 @@ $width: 1200px;
 $boxsize: border-box;
 
 /* Mixin */
-@mixin logo($size) {
+@mixin textStyle($size) {
   margin: 1em auto 0;
   font-family: $logo;
   font-size: $size;
@@ -93,7 +93,7 @@ $boxsize: border-box;
     }
   }
   animation: borderHover 2s ease infinite alternate;
-  transition: all 3s ease;
+  transition: border 3s ease;
 }
 
 /* Tags */
@@ -106,7 +106,7 @@ $boxsize: border-box;
   margin: 0 auto;
   text-align: center;
   .logo {
-    @include logo($font + 41);
+    @include textStyle($font + 41);
   }
 }
 
@@ -150,7 +150,6 @@ $boxsize: border-box;
     .main_inner {
       height: 600px;
       overflow-y: scroll;
-
       @include scrollStyle;
 
       .cont_list {
@@ -182,8 +181,8 @@ $boxsize: border-box;
             box-sizing: border-box;
             box-shadow: 0 0 30px $bg;
 
-            > strong.logo {
-              @include logo($font);
+            > strong.dday {
+              @include textStyle($font + 6px);
               display: block;
               margin: 0 0 1.5em;
               text-align: center;
@@ -234,50 +233,51 @@ $boxsize: border-box;
 }
 
 /* popup */
-.popup_wrap {
-  position: fixed;
-  top: 2em;
-  left: 50%;
-  width: $width/2;
-  height: auto;
-  margin-left: -$width/2/2;
-  padding: 2em;
-  background: $white;
-  font-size: 1.1em;
-  border: $border;
-  border-radius: 0.5em;
-  color: $black;
-  opacity: 0;
-  z-index: 2;
-  .logo {
-    @include logo($font);
-    margin: 0;
-    > em {
-      font-style: normal;
+.popup_section {
+  .popup_wrap {
+    position: fixed;
+    top: 2em;
+    left: 50%;
+    width: $width/2;
+    height: auto;
+    margin-left: -$width/2/2;
+    padding: 2em;
+    background: $white;
+    font-size: 1.1em;
+    border: 1px solid transparent;
+    border-radius: 0.5em;
+    @include borderAni(1px);
+    color: $black;
+    opacity: 0;
+    z-index: 2;
+    .dday,
+    .text {
+      @include textStyle($font + 6px);
+      margin: 0;
     }
-  }
-  button,
-  input[type="button"] {
-    border: none;
-    background: transparent;
-  }
-  .btn_close {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    font-size: 1.5em;
-    color: $color;
-    cursor: pointer;
-  }
-  .btn_box {
-    margin-top: 1em;
-    text-align: center;
-    input {
-      margin: 0 0.5em;
-      @include inputStyle;
-      &:hover {
-        @include gradientAni;
-        color: $white;
+    button,
+    input[type="button"] {
+      border: none;
+      background: transparent;
+    }
+    .btn_close {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      font-size: 1.5em;
+      color: $color;
+      cursor: pointer;
+    }
+    .btn_box {
+      margin-top: 1em;
+      text-align: center;
+      input {
+        margin: 0 0.5em;
+        @include inputStyle;
+        &:hover {
+          @include gradientAni;
+          color: $white;
+        }
       }
     }
   }
@@ -300,6 +300,8 @@ $boxsize: border-box;
   > span {
     display: block;
     margin-top: 1em;
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid $color;
     &:first-child {
       margin-top: 0;
     }
@@ -315,6 +317,7 @@ $boxsize: border-box;
     width: 100%;
     height: 150px;
     padding: 0 1em;
+    border-bottom: none;
     font-size: 0.9em;
     box-sizing: $boxsize;
     @include scrollStyle;
